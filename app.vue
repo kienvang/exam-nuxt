@@ -1,6 +1,10 @@
+<script setup lang="ts">
+// Không cần thêm gì ở đây nếu không có logic
+</script>
+
+<!-- app.vue -->
 <template>
-  <div>
-    <NuxtRouteAnnouncer />
-    <NuxtWelcome />
-  </div>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
