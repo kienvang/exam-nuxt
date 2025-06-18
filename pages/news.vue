@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import useNewsRepository from "@/composables/repositories/useNewsRepository";
 const newsList = ref([]);
 // const { data: newsList } = await useFetch("/api/news");
 async function loadData() {
   try {
-    const data = await $fetch("/api/news"); // Lấy dữ liệu từ API
+    //const data = await $fetch("/api/news"); // Lấy dữ liệu từ API
+    const data = await useNewsRepository().getNews();
     console.log("Data loaded:", data);
     newsList.value = data; // Gán dữ liệu vào `newsList`
   } catch (err) {
