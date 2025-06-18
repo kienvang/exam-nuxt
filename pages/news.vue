@@ -1,25 +1,19 @@
 <script setup lang="ts">
-const newsList = ref([])
-const { data, status, error, refresh, clear } = await useFetch('/api/news', {
-  pick: ['title']
-})
+const newsList = ref([]);
+// const { data: newsList } = await useFetch("/api/news");
 async function loadData() {
   try {
-    const { data, error } = await useFetch('http://localhost:3000/api/news'); // Lấy dữ liệu từ API
-    if (error) {
-      console.error('Error fetching data:', error);
-      return;
-    }
-    console.log('Data loaded:', data);
+    const data = await $fetch("/api/news"); // Lấy dữ liệu từ API
+    console.log("Data loaded:", data);
     newsList.value = data; // Gán dữ liệu vào `newsList`
   } catch (err) {
-    console.error('Error loading data:', err);
+    console.error("Error loading data:", err);
   }
 }
 
 onMounted(async () => {
-  //await loadData();
-})
+  await loadData();
+});
 </script>
 
 <template>
@@ -33,7 +27,7 @@ onMounted(async () => {
       </tr>
     </thead>
     <tbody>
-      <tr v-for="news in data.data" :key="news.id">
+      <tr v-for="news in newsList.data" :key="news.id">
         <td>{{ news.title }}</td>
         <td>{{ news.author }}</td>
         <td>{{ news.content }}</td>
@@ -48,7 +42,8 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin: 20px 0;
-  th, td {
+  th,
+  td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
