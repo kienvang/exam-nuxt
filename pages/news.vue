@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import useNewsRepository from "@/composables/repositories/useNewsRepository";
+
+definePageMeta({
+  title: "Tin tức",
+});
+
 const newsList = ref([]);
 // const { data: newsList } = await useFetch("/api/news");
 async function loadData() {
@@ -22,10 +27,10 @@ onMounted(async () => {
   <table>
     <thead>
       <tr>
-        <th>Tiêu đề</th>
-        <th>Tác giả</th>
+        <th width="25%">Tiêu đề</th>
+        <th width="10%">Tác giả</th>
         <th>Nội dung</th>
-        <th>Ngày đăng</th>
+        <th width="10%">Ngày đăng</th>
       </tr>
     </thead>
     <tbody>
